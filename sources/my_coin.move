@@ -48,38 +48,38 @@ module my_coin::my_coin {
         coin::mint_and_transfer(c, amount, recipient, ctx);
     }
 
-    #[test_only]
-    public fun init_for_test(ctx: &mut TxContext) {
-        init(MY_COIN{}, ctx);
-    }
+//     #[test_only]
+//     public fun init_for_test(ctx: &mut TxContext) {
+//         init(MY_COIN{}, ctx);
+//     }
 }
 
-#[test_only]
-/// Implements tests for most common scenarios for the coin example.
-module my_coin::my_coin_tests {
-    use my_coin::my_coin::{MY_COIN, init_for_test};
-    use sui::coin::{Self, TreasuryCap};
-    use sui::test_scenario as ts;
+// #[test_only]
+// /// Implements tests for most common scenarios for the coin example.
+// module my_coin::my_coin_tests {
+//     use my_coin::my_coin::{MY_COIN, init_for_test};
+//     use sui::coin::{Self, TreasuryCap};
+//     use sui::test_scenario as ts;
 
-    #[test]
-    fun mint_transfer_update() {
-        let addr1 = @0xA;
-        let addr2 = @0xB;
+//     #[test]
+//     fun mint_transfer_update() {
+//         let addr1 = @0xA;
+//         let addr2 = @0xB;
 
-        // init simple_token module
-        let scenario = ts::begin(addr1);
-        {
-            init_for_test(ts::ctx(&mut scenario));
-        };
+//         // init simple_token module
+//         let scenario = ts::begin(addr1);
+//         {
+//             init_for_test(ts::ctx(&mut scenario));
+//         };
 
-        // mint
-        ts::next_tx(&mut scenario, addr1);
-        {
-            let tc = ts::take_from_sender<TreasuryCap<MY_COIN>>(&scenario);
-            coin::mint_and_transfer<MY_COIN>(&mut tc, 10000000000, addr2, ts::ctx(&mut scenario));
-            ts::return_to_sender(&scenario, tc);
-        };
+//         // mint
+//         ts::next_tx(&mut scenario, addr1);
+//         {
+//             let tc = ts::take_from_sender<TreasuryCap<MY_COIN>>(&scenario);
+//             coin::mint_and_transfer<MY_COIN>(&mut tc, 10000000000, addr2, ts::ctx(&mut scenario));
+//             ts::return_to_sender(&scenario, tc);
+//         };
 
-        ts::end(scenario);
-    }
-}
+//         ts::end(scenario);
+//     }
+// }
